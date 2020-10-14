@@ -1,0 +1,156 @@
+﻿<Window x:Class="PluginGUI.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+        xmlns:core="clr-namespace:Menards.Merch.BOA.Core;assembly=Menards.Merch.BOA.Core"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:viewModels="clr-namespace:PluginGUI.ViewModels"
+        xmlns:converters="clr-namespace:PluginGUI.Views.Converters"
+        DataContext="{Binding Path=MainWindowViewModel, RelativeSource={RelativeSource Mode=Self}}"
+        Title="MainWindow" MinHeight="420" MinWidth="750" Height="600" Width="1250"
+        Loaded="MainWindow_OnLoaded"
+        Closing="MainWindow_OnClosing"
+        >
+
+    <Window.Resources>
+        <ObjectDataProvider MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}"
+                            x:Key="HostServerType">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="core:HostServerType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <converters:IsNothingVisibilityConverter x:Key="IsNothingVisibilityConverter" />
+        <converters:IsEmptyConverter x:Key="IsEmptyConverter" />
+        <converters:TypeNameConverter x:Key="TypeNameConverter" />
+        <converters:EnumValuesConverter x:Key="EnumValuesConverter" />
+
+        <x:Array x:Key="FallbackParameters" Type="{x:Type viewModels:ParameterViewModel}" />
+    </Window.Resources>
+
+    <xctk:BusyIndicator IsBusy="{Binding LoadingPlugins}" BusyContent="Loading Plugins...">
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="0,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="0,0,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <xctk:WatermarkTextBox HorizontalAlignment="Stretch" Watermark="Search Plugins..." Margin="0,0,5,0" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" />
+                    <Button Grid.Column="1" Command="{Binding UpdateAddInCommand}" MinHeight="24">Reload Plugins</Button>
+                </Grid>
+
+                <ListBox Grid.Row="1" ItemsSource="{Binding PluginCollection, Mode=OneWay}" SelectedItem="{Binding SelectedPlugin}" MinWidth="250">
+                    <ListBox.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontWeight="Bold" Text="{Binding Items[0].Prefix}" Background="#E9E9E9"/>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                        </GroupStyle>
+                    </ListBox.GroupStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding PluginName}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="0,0,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Content="Host Type" IsEnabled="{Binding SelectedPlugin.CanRun, FallbackValue=false}" />
+                    <ComboBox Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center" ItemsSource="{Binding Source={StaticResource HostServerType}}" SelectedItem="{Binding SelectedPlugin.HostType}" IsEnabled="{Binding SelectedPlugin.CanRun, FallbackValue=false}" Margin="0,0,5,0" MinHeight="24" Width="100" />
+                    <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Content="Restart Delay (sec)" IsEnabled="{Binding SelectedPlugin.CanRun, FallbackValue=false}" Margin="0,5,0,0" />
+                    <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" Value="{Binding SelectedPlugin.RestartDelay}" IsEnabled="{Binding SelectedPlugin.CanRun, FallbackValue=false}" Margin="0,5,5,0" MinHeight="24" Width="100" />
+
+                    <Label Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Content="TD Host Type" IsEnabled="{Binding SelectedPlugin.CanRun, FallbackValue=false}" />
+                    <ComboBox Grid.Row="0" Grid.Column="4" VerticalContentAlignment="Center" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource HostServerType}}" SelectedItem="{Binding SelectedPlugin.TeradataHostType}" IsEnabled="{Binding SelectedPlugin.CanRun, FallbackValue=false}" Margin="0,0,5,0" MinHeight="24" Width="100" />
+                    <Label Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Content="Test Email" IsEnabled="{Binding SelectedPlugin.CanRun, FallbackValue=false}" Margin="0,5,5,0" />
+                    <TextBox Grid.Row="1" Grid.Column="4" Text="{Binding SelectedPlugin.TestEmail}" Height="24" IsEnabled="{Binding SelectedPlugin.CanRun, FallbackValue=false}" Margin="0,5,0,0" />
+                    <Button Grid.Row="1" Grid.Column="5" Command="{Binding SelectedPlugin.UserEmailCommand}" IsEnabled="{Binding SelectedPlugin.CanRun, FallbackValue=false}" Width="25" Margin="5,5,0,0" >
+                        <Image Source="/Resources/user.png" Width="16" Height="16"/>
+                    </Button>
+                    <Button Grid.Row="1" Grid.Column="6" Command="{Binding SelectedPlugin.SkumanEmailCommand}" IsEnabled="{Binding SelectedPlugin.CanRun, FallbackValue=false}" Width="25" Margin="5,5,0,0" >
+                        <Image Source="/Resources/skuman.png" Width="16" Height="16"/>
+                    </Button>
+                    <Button Grid.Row="1" Grid.Column="5" Command="{Binding SelectedPlugin.UserEmailCommand}" IsEnabled="{Binding SelectedPlugin.CanRun, FallbackValue=false}" Width="25" Margin="5,5,0,0" >
+                        <Image Source="/Resources/user.png" Width="16" Height="16"/>
+                    </Button>
+                    <Button Grid.Row="1" Grid.Column="7" Command="{Binding SelectedPlugin.PomanEmailCommand}" IsEnabled="{Binding SelectedPlugin.CanRun, FallbackValue=false}" Width="25" Margin="5,5,0,0" >
+                        <Image Source="/Resources/poman.png" Width="16" Height="16"/>
+                    </Button>                    
+                </Grid>
+                <Grid Grid.Row="1" Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Visibility="{Binding Converter={StaticResource IsNothingVisibilityConverter}}" FontWeight="Bold" Text="{Binding SelectedPlugin.PluginDescription}" TextWrapping="Wrap" IsEnabled="True" Margin="0,0,5,0" />
+                    <Button Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0"  IsEnabled="{Binding SelectedPlugin.CanStop, FallbackValue=false}" Width="70" Height="25" Command="{Binding SelectedPlugin.StopCommand}">
+                        <TextBlock Text="Stop" FontWeight="Bold" />
+                    </Button>                    
+                    <Button Grid.Column="2" VerticalAlignment="Center"  IsEnabled="{Binding SelectedPlugin.CanRun, FallbackValue=false}" Width="70" Height="25" Command="{Binding SelectedPlugin.RunCommand}">
+                        <TextBlock Text="Run" FontWeight="Bold" />
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Row="3" />
+                <Grid Grid.Row="4">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" BorderThickness="1" BorderBrush="Black">
+                        <TextBox IsReadOnly="True" Text="{Binding SelectedPlugin.OutputText}" TextWrapping="Wrap" IsEnabled="True" Margin="0,5,0,0" />
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+        </Grid>
+    </xctk:BusyIndicator>
+</Window>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

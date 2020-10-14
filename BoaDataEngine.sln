@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BoaDataEngine", "BoaDataEngine\BoaDataEngine.vbproj", "{3F58D0D3-5CA2-4C8B-A549-3599203B3DF8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{6E80E520-C075-4833-A831-BD97D4FB771A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoaDataEngine.Library", "BoaDataEngine.Library\BoaDataEngine.Library.csproj", "{A12EC26A-41D7-4342-83E3-B6E9BEB9BE0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginGUI", "PluginGUI\PluginGUI.csproj", "{19581BDF-A73B-4A7C-BCA3-DAD618412D38}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3F58D0D3-5CA2-4C8B-A549-3599203B3DF8} = {3F58D0D3-5CA2-4C8B-A549-3599203B3DF8}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PredictIt", "PredictIt", "{54523B26-217C-43E3-A093-198FD01189F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PredictIt.PriceArchiver", "Plugins\OGIR.GuestEmails\PredictIt.PriceArchiver.csproj", "{093C21FD-7237-4335-87E5-57581E5F7FA5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F58D0D3-5CA2-4C8B-A549-3599203B3DF8}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{3F58D0D3-5CA2-4C8B-A549-3599203B3DF8}.Debug|Any CPU.Build.0 = Debug|x86
+		{3F58D0D3-5CA2-4C8B-A549-3599203B3DF8}.Debug|x86.ActiveCfg = Debug|x86
+		{3F58D0D3-5CA2-4C8B-A549-3599203B3DF8}.Debug|x86.Build.0 = Debug|x86
+		{3F58D0D3-5CA2-4C8B-A549-3599203B3DF8}.Release|Any CPU.ActiveCfg = Release|x86
+		{3F58D0D3-5CA2-4C8B-A549-3599203B3DF8}.Release|Any CPU.Build.0 = Release|x86
+		{3F58D0D3-5CA2-4C8B-A549-3599203B3DF8}.Release|x86.ActiveCfg = Release|x86
+		{3F58D0D3-5CA2-4C8B-A549-3599203B3DF8}.Release|x86.Build.0 = Release|x86
+		{A12EC26A-41D7-4342-83E3-B6E9BEB9BE0E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A12EC26A-41D7-4342-83E3-B6E9BEB9BE0E}.Debug|Any CPU.Build.0 = Debug|x86
+		{A12EC26A-41D7-4342-83E3-B6E9BEB9BE0E}.Debug|x86.ActiveCfg = Debug|x86
+		{A12EC26A-41D7-4342-83E3-B6E9BEB9BE0E}.Debug|x86.Build.0 = Debug|x86
+		{A12EC26A-41D7-4342-83E3-B6E9BEB9BE0E}.Release|Any CPU.ActiveCfg = Release|x86
+		{A12EC26A-41D7-4342-83E3-B6E9BEB9BE0E}.Release|Any CPU.Build.0 = Release|x86
+		{A12EC26A-41D7-4342-83E3-B6E9BEB9BE0E}.Release|x86.ActiveCfg = Release|x86
+		{A12EC26A-41D7-4342-83E3-B6E9BEB9BE0E}.Release|x86.Build.0 = Release|x86
+		{19581BDF-A73B-4A7C-BCA3-DAD618412D38}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{19581BDF-A73B-4A7C-BCA3-DAD618412D38}.Debug|Any CPU.Build.0 = Debug|x86
+		{19581BDF-A73B-4A7C-BCA3-DAD618412D38}.Debug|x86.ActiveCfg = Debug|x86
+		{19581BDF-A73B-4A7C-BCA3-DAD618412D38}.Debug|x86.Build.0 = Debug|x86
+		{19581BDF-A73B-4A7C-BCA3-DAD618412D38}.Release|Any CPU.ActiveCfg = Release|x86
+		{19581BDF-A73B-4A7C-BCA3-DAD618412D38}.Release|Any CPU.Build.0 = Release|x86
+		{19581BDF-A73B-4A7C-BCA3-DAD618412D38}.Release|x86.ActiveCfg = Release|x86
+		{19581BDF-A73B-4A7C-BCA3-DAD618412D38}.Release|x86.Build.0 = Release|x86
+		{093C21FD-7237-4335-87E5-57581E5F7FA5}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{093C21FD-7237-4335-87E5-57581E5F7FA5}.Debug|Any CPU.Build.0 = Debug|x86
+		{093C21FD-7237-4335-87E5-57581E5F7FA5}.Debug|x86.ActiveCfg = Debug|x86
+		{093C21FD-7237-4335-87E5-57581E5F7FA5}.Debug|x86.Build.0 = Debug|x86
+		{093C21FD-7237-4335-87E5-57581E5F7FA5}.Release|Any CPU.ActiveCfg = Release|x86
+		{093C21FD-7237-4335-87E5-57581E5F7FA5}.Release|Any CPU.Build.0 = Release|x86
+		{093C21FD-7237-4335-87E5-57581E5F7FA5}.Release|x86.ActiveCfg = Release|x86
+		{093C21FD-7237-4335-87E5-57581E5F7FA5}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{54523B26-217C-43E3-A093-198FD01189F0} = {6E80E520-C075-4833-A831-BD97D4FB771A}
+		{093C21FD-7237-4335-87E5-57581E5F7FA5} = {54523B26-217C-43E3-A093-198FD01189F0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A45DA5F-857B-4338-99BE-54F070CD706C}
+	EndGlobalSection
+EndGlobal
